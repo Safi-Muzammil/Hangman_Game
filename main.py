@@ -36,6 +36,18 @@ def Player_one():
 
         return word
 
+def Get_Max_Guesses():
+    while True:
+        try:
+            guesses = int(input("Enter maximum incorrect guesses: "))
+            if guesses < 1 or guesses >7:
+                print("Please enter guesses between 1 to 7.")
+
+        except ValueError:
+            print("Invalid input! Please enter only whole number.")
+
+        return guesses
+
 
 
   
