@@ -15,10 +15,61 @@ def Build_Hidden_Line(word, guessed_char):
 
     return hidden_line
 
-
-# Function for Hangman image. 
 def Hangman_Image():
-    pass
+    pictures = [
+        """
+         +---+
+             |
+             |
+             |
+            ===
+        """,
+        """
+         +---+
+         O   |
+             |
+             |
+            ===
+        """,
+        """
+         +---+
+         O   |
+         |   |
+             |
+            ===
+        """,
+        """
+         +---+
+         O   |
+        /|   |
+             |
+            ===
+        """,
+        """
+         +---+
+         O   |
+        /|\\  |
+             |
+            ===
+        """,
+        """
+         +---+
+         O   |
+        /|\\  |
+        /    |
+            ===
+        """,
+        """
+         +---+
+         O   |
+        /|\\  |
+        / \\  |
+            ===
+        """
+    ]
+
+    return pictures
+
 
 
 def Player_one():
@@ -48,6 +99,60 @@ def Get_Max_Guesses():
 
         return guesses
 
+
+def Play_Game(word, max_guesses):
+    guessed_char = []
+    wrong_guesses = 0
+    pictures = Hangman_Image ()
+
+    while wrong_guesses < max_guesses:
+        hidden_line = Build_Hidden_Line(word, guessed_char)
+        print(pictures[wrong_guesses])
+        print("Word: ", hidden_line)
+        print("Wrong guesses: ", wrong_guesses, "/", max_guesses)
+
+        if hidden_line == word:
+            print("Congratulations! You have guessed the word.")
+            return
+
+        guess = input("Guess a letter: ").strip().lower()
+
+        # validate the player's guess:
+
+        if len(guess) != 1 or not guess.isalpha():
+            print("Please enter one letter at a time.")
+            continue
+        if guess in guessed_char:
+            print("You have already guessed this letter.")
+
+            continue
+        guessed_char.append(guess)
+
+        if guess not in word:
+            wrong_guesses += 1
+            print("Incorrect guess!")
+
+        else:
+            print("Correct guess!")
+
+    # Displaying final image:
+    print(pictures[min(wrong_guesses, len(pictures) - 1)])
+    print("Word: ", word)
+    print("Game over! You ran out of guesses.")
+
+
+# main function to run the game:
+
+def main():
+    print("-----Hangman Game-----")
+
+    word = Player_one()
+    max_guesses = Get_Max_Guesses()
+    Play_Game(word, max_guesses)
+
+
+if __name__ == "__main__":
+    main()
 
 
   
