@@ -81,7 +81,7 @@ def Player_one():
 
         if not all(char.isalpha() or word == " " for char in word):
             print("Please enter character or space only.")
-            continue
+            #continue
         # Hiding player one input.
         print("\n" * 50)
 
